@@ -1,4 +1,4 @@
-# Sodalicium_Capstone
+# Retro Rabbit Requistions Routine
 
 **Project Overview**
 
@@ -22,7 +22,6 @@ The image scanner will extract the relevant information from the scanned image, 
 **Team Members**
 
 Oluwatosin Botti u13208642 <br>
-Tlou Lebelo u15209190 <br>
 
 |Team Member | Details | 
 | :---         | :---         |  
@@ -33,9 +32,4 @@ Tlou Lebelo u15209190 <br>
 |**Interests** |Creating Websites, Reading...novels, Cooking, Eating and Gaming|
 |**Skills**|C++, C#, Java, Web Development: HTML, CSS, Bootstrap, JavaScript, PHP, AJAX, JQuery, JSON, SQL, Mongo DB|
 |       |
-|**Tlou Lebelo**|**u15209190** |
-|**Profile** |<a href="https://github.com/Kgatishi" target="_blank">Github</a>|
-|**Overview**|I am friendly person always willing to learn new stuff including new ideas and intelligence brought by others. |
-|**Position** |BSc Computer Science|
-|**Interests** |Big data and data mining, Intenet of Things, soccer|
-|**Skills**|C++, C#, Java, Web Development: HTML, CSS, Bootstrap, JavaScript, PHP, AJAX, JQuery, JSON,
+
