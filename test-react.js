@@ -168,7 +168,7 @@ const rate = 3.64;
 
 
     //real time listenener
-    database.collection('claims').where('username', '==', user).onSnapshot(snapshot =>{
+    database.collection('claims').onSnapshot(snapshot =>{
       let changes = snapshot.docChanges();
       changes.forEach(change => {
         if(change.type == 'added'){
