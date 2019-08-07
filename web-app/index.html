@@ -1,0 +1,125 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Reformed Rabbit Requistions Routine</title>
+	<link rel="stylesheet" href="styles.css">
+	<script defer src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
+</head>
+<body>
+	<h1>Claims</h1>
+	<div class="content">
+		<div id="test-react-container">
+		<form id = "add-claim">
+			<input type="date" name="date">
+			<select name="type">
+				<option value="Miscellaneous">Miscellaneous</option>
+				<option value="Fuel">Fuel</option>
+			</select>
+			<input type="number" name="amount" placeholder="Total Amount" step="0.01">
+			<input type="text" name="username" placeholder="Jane Doe">
+			<button>Add Claim</button>
+		</form>
+		<ul id="claims-list"></ul>
+	</div>
+	</div>
+	<!-- The Modal -->
+	<div id="myModal" class="modal">
+
+		<!-- Modal content -->
+		<div class="modal-content">
+		<span class="close">&times;</span>
+		<form id = "update-claim">
+				<input type="date" name="updateDate">
+				<select name="updateType">
+					<option value="Miscellaneous">Miscellaneous</option>
+					<option value="Fuel">Fuel</option>
+				</select>
+				<input type="number" name="updateAmount" placeholder="Total Amount" step="0.01">
+				<input type="text" name="updateUsername" placeholder="Jane Doe">
+				<button>Update</button>
+			</form>
+		</div>
+	
+	</div>
+	<!--section class="section">
+		<div class="container">
+			<h1 class="title">
+				Claims
+			</h1>
+			<div class="content">
+				<button id="btnAdd" class="button"><i class="fa fa-plus"></i> Create Claim</button>
+			</div>
+			<div id="card-list" class="columns is-mobile">
+
+			</div>
+		</div>
+		<div id="modal" class="modal">
+			<div class="modal-background"></div>
+			<div class="modal-card">
+				<header class="modal-card-head">
+					<p class="modal-card-title">Claim Form</p>
+					<button class="btnClose delete" aria-label="close"></button>
+				</header>
+				<section class="modal-card-body">
+					<div class="field">
+						<label class="label">Username</label>
+						<div class="control">
+							<input type="hidden" id="txtType">
+							<input type="hidden" id="txtKey">
+							<input class="input" id="txtName" type="text" placeholder="Name">
+						</div>
+						<p class="help"> </p>
+					</div>
+					<div class="field">
+						<label class="label">Date</label>
+						<div class="control">
+							<input class="input" id="txtEmail" type="text" placeholder="Email">
+						</div>
+						<p class="help"> </p>
+					</div>
+					<div class="field">
+						<label class="label">Profile Picture</label>
+						<div class="control">
+							<input class="input" id="txtPic" type="text" placeholder="Profile picture url">
+						</div>
+						<p class="help"></p>
+					</div>
+				</section>
+				<footer class="modal-card-foot">
+					<button id="btnSave" class="button is-success">Save changes</button>
+					<button id="btnClose" class="button">Cancel</button>
+				</footer>
+			</div>
+		</div>
+	</section-->
+	<script src="https://code.jquery.com/jquery-2.2.4.min.js"
+	integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+	crossorigin="anonymous"></script>
+	<script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-firestore.js"></script>
+	<script>
+		var nextkey =0;
+		var firebaseConfig = {
+			apiKey: "AIzaSyAiH95dfeksCh_ZuAPcT4ieebrz4I-TNlU",
+			authDomain: "test-project-67aff.firebaseapp.com",
+			databaseURL: "https://test-project-67aff.firebaseio.com",
+			projectId: "test-project-67aff",
+			storageBucket: "test-project-67aff.appspot.com",
+            messagingSenderId: "36159811627",
+            appId: "1:36159811627:web:ef42d4303bbf168d"
+		};
+		firebase.initializeApp(firebaseConfig);
+		const database = firebase.firestore();
+
+		
+		
+	</script>
+	<script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+	<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+
+	<script src="test-react.js"></script>
+</body>
+</html>
