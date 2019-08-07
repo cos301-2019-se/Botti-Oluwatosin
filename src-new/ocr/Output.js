@@ -5,18 +5,37 @@ import { StyleSheet, View, Text } from 'react-native';
 
 export default class SecondPage extends Component {
 
-
-
+constructor(props){
+    super(props);
+    this.state = {
+      //defauilt value of the date time
+      date: '',
+    };
+  }
+  componentDidMount() {
+    var that = this;
+    var date = new Date().getDate(); //Current Date
+    var month = new Date().getMonth() + 1; //Current Month
+    var year = new Date().getFullYear(); //Current Year
+    var hours = new Date().getHours(); //Current Hours
+    var min = new Date().getMinutes(); //Current Minutes
+    var sec = new Date().getSeconds(); //Current Seconds
+    that.setState({
+      //Setting the value of the date time
+      date:
+        date + '/' + month + '/' + year,
+    });
+  }
     render() {
-        const date = this.props.navigation.getParam('date', 'error: not found');
-        const total = this.props.navigation.getParam('total', 'error: not found');
-        //const text =  this.props.navigation.getParam('text', 'nothing sent');
+        //const date = this.props.navigation.getParam('date', 'error: not found');
+        //const total = this.props.navigation.getParam('total', 'error: not found');
+        const text =  this.props.navigation.getParam('text', 'nothing sent');
         return (
             <View style={styles.container}>
 
                 <Text>--------------------------</Text>
-                <Text>Date:{date}</Text>
-                <Text>Total:{total}</Text>
+                <Text>Date:{this.state.date}</Text>
+                <Text>Total:{text}</Text>
                 <Text>--------------------------</Text>
 
             </View>

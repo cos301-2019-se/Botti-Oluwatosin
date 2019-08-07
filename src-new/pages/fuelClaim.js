@@ -63,7 +63,7 @@ export default class LoginView extends Component {
                 onChangeText={(kmBefore) => this.setState({kmBefore})}/>
         </View>
         
-        <GpsLocationTracker/>
+      
         
         <View style={styles.inputContainer}>
             <TouchableHighlight onPress={() => this.onLoginClickListener('ocr')}>
@@ -71,7 +71,7 @@ export default class LoginView extends Component {
             </TouchableHighlight>
 
             <TextInput style={styles.inputs}
-                placeholder="kolometers"
+                placeholder="kilometers"
                 keyboardType="decimal-pad"
                 underlineColorAndroid='transparent'
                 onChangeText={(kmAfter) => this.setState({kmAfter})}/>

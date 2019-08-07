@@ -31,6 +31,7 @@ export default class OCR extends Component<Props> {
         total: 0,
         date: "",
         odometer: 0,
+        zoomValue: 0,
     };
 
 
@@ -46,7 +47,8 @@ export default class OCR extends Component<Props> {
             loading: true
         });
         try {
-            const data = await camera.takePictureAsync(PICTURE_OPTIONS);
+            const data = await camera.takePictureAsync(PICTURE_OPTIONS); //data is equal to the picture taken with the camera
+            //const data = ./images/example.jpg'
             if (!data.uri) {
                 throw "OTHER";
             }
@@ -90,15 +92,15 @@ export default class OCR extends Component<Props> {
     processImage = async (uri, imageProperties) => {
         try {
             const visionResp = await RNTextDetector.detectFromUri(uri);
-            //console.log("image23");
-            var resp = Object.values(visionResp);
+            console.log("image23", visionResp);
+            var resp = Object.values(visionResp);// what does this line do
 
             //copy the data ............................
             var copyData = resp ;
             this.analyzeReceiptData(copyData);
             //..........................................
-            var textRecieved = JSON.stringify(resp);
-            var fol = textRecieved.concat("\"text\"");
+            var textReceived = JSON.stringify(resp);
+            var fol = textReceived.concat("\"text\"");
 
             var textR = fol.replace(/(?="bounding")(.*?)(?="text")/g,"");
 
@@ -239,7 +241,7 @@ export default class OCR extends Component<Props> {
         });
     };
 
-    onLoginClickListener = (out) => {
+   /*onLoginClickListener = (out) => {
 
         //this.props.navigation.navigate('Output', { total: this.state.total, date: this.state.date, text: textString })
         const claim = this.props.navigation.getParam('claim', 'error: not found');
@@ -249,6 +251,10 @@ export default class OCR extends Component<Props> {
             this.props.navigation.navigate('Output', { total: this.state.total, date: this.state.date})
         }
         this.props.navigation.navigate('Output', { total: this.state.total, date: this.state.date})
+    }*/
+    onLoginClickListener = (out) => {
+
+        this.props.navigation.navigate('Output', {text: textString})
     }
 
 
