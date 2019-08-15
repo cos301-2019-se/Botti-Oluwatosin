@@ -7,11 +7,14 @@
  */
 
 import React, {Component} from 'react';
-import {View, TouchableOpacity, ImageBackground, Text, TouchableHighlight, StyleSheet} from 'react-native';
+import {View, TouchableOpacity, ImageBackground, Text, TouchableHighlight, StyleSheet, ScrollView, NativeModules} from 'react-native';
 import style, {screenHeight, screenWidth} from "../styles";
 import {RNCamera as Camera} from "react-native-camera";
 import RNTextDetector from "react-native-text-detector";
+//import ImagePicker from "react-native-image-crop-picker";
+import AsyncStorage from '@react-native-community/async-storage';
 
+//const { height, width} = Dimensions.get('window'); 
 type Props = {};
 var textString = "";
 
@@ -20,7 +23,7 @@ const PICTURE_OPTIONS = {
     fixOrientation: true,
     forceUpOrientation: true
 };
-
+var ImagePicker = NativeModules.ImageCropPicker;
 export default class OCR extends Component<Props> {
 
     state = {
@@ -30,10 +33,18 @@ export default class OCR extends Component<Props> {
         visionResp: [],
         total: 0,
         date: "",
-        odometer: 0,
-        zoomValue: 0,
+        odometerStart: '',
+        odometerEnd:''
     };
 
+    async componentWillMount() {
+        const odometerStart = await AsyncStorage.getItem('@ODOMETER_START');
+        if (odometerStart) {
+          this.setState({
+            odometerStart,
+          });
+        }
+      }
 
     onLoginClickListener = (out) => {
         this.props.navigation.navigate('Output')
@@ -219,6 +230,55 @@ export default class OCR extends Component<Props> {
 
     };
 
+    setReading = async (rText) => {
+        console.log("I have entered the function")
+        /*const {storedNumber} = this.state;
+    
+        const newNumber = +storedNumber > 0 ? +storedNumber + 10 : 10;
+    
+        await AsyncStorage.setItem(ODOMETER_START, `${newNumber}`);
+    
+        this.setState({storedNumber: `${newNumber}`, needRestart: true});*/
+        const number = rText.replace(/ /g, "");
+        if(this.state.odometerStart === '')
+        {
+            console.log("OdometerStart state is not set")
+            /*await AsyncStorage.setItem(ODOMETER_START, number);
+            this.setState({odometerStart: `${number}`});
+            const value = await AsyncStorage.getItem(ODOMETER_START)*/
+            try {
+                await AsyncStorage.setItem('@ODOMETER_START', number)
+                this.setState({odometerStart: number});
+              } catch(e) {
+                // save error
+                console.log(e);
+              }
+            
+              console.log('Done.')
+            
+            const value = await AsyncStorage.getItem('@ODOMETER_START')
+            if(value !== null) {
+            // value previously stored
+            console.log("ODOMETER_START has been set", value );
+            console.log("odometerStart:", this.state.odometerStart);
+            }
+            this.props.navigation.navigate('FUELCLAIM'); 
+        }
+        else
+        {   console.log("OdometerStart state should be set, but not yet OdometerEnd")
+            await AsyncStorage.setItem('@ODOMETER_END', number);
+            this.setState({odometerEnd:number});
+            const value = await AsyncStorage.getItem('@ODOMETER_END')
+            if(value !== null) {
+                console.log("ODOMETER_END has been set", value );
+                console.log("odometerEnd:", this.state.odometerEnd);
+            }
+            
+            this.props.navigation.navigate('Output', {start:this.state.odometerStart, end:this.state.odometerEnd})
+        }
+        
+      };
+
     // mapVisionRespToScreen
     // Shows where text is being detected
 
@@ -240,6 +300,22 @@ export default class OCR extends Component<Props> {
             };
         });
     };
+    /*mapVisionRespToScreen = (visionResp, imageProperties) => {
+        const IMAGE_TO_SCREEN_Y = screenHeight / imageProperties.height;
+        const IMAGE_TO_SCREEN_X = screenWidth / imageProperties.width;
+    
+        return visionResp.map(item => {
+          return {
+            ...item,
+            position: {
+              width: item.bounding.width * IMAGE_TO_SCREEN_X,
+              left: item.bounding.left * IMAGE_TO_SCREEN_X,
+              height: item.bounding.height * IMAGE_TO_SCREEN_Y,
+              top: item.bounding.top * IMAGE_TO_SCREEN_Y
+            }
+          };
+        });
+      };*/
 
    /*onLoginClickListener = (out) => {
 
@@ -257,9 +333,37 @@ export default class OCR extends Component<Props> {
         this.props.navigation.navigate('Output', {text: textString})
     }
 
+    pickSingleWithCamera(cropping, mediaType='photo') {
+        ImagePicker.openCamera({
+          cropping: cropping,
+          width: 500,
+          height: 500,
+          includeExif: true,
+          mediaType,
+        }).then(image => {
+          console.log('received image', image);
+          this.setState({
+            image: {uri: image.path, width: image.width, height: image.height, mime: image.mime},
+            images: null
+          });
+        }).catch(e => alert(e));
+      }
+
+    renderImage(image) {
+        return <Image style={{width: 300, height: 300, resizeMode: 'contain'}} source={image} />
+      }
+    
+      renderAsset(image) {
+        if (image.mime && image.mime.toLowerCase().indexOf('video/') !== -1) {
+          return this.renderVideo(image);
+        }
+    
+        return this.renderImage(image);
+      }
 
     render() {
         return (
+            
             <View style={style.screen}>
                 {!this.state.image ? (
                     <Camera
@@ -270,6 +374,7 @@ export default class OCR extends Component<Props> {
                         style={style.camera}
                         notAuthorizedView={null}
                         playSoundOnCapture
+                        zoom = {this.state.zoomValue}
                     >
                         {({camera, status}) => {
                             if (status !== "READY") {
@@ -298,6 +403,8 @@ export default class OCR extends Component<Props> {
                                 <TouchableOpacity
                                     style={[style.boundingRect, item.position]}
                                     key={item.text}
+                                    onPress={() => this.setReading(item.text)}
+                                    //onPress={() => this.onLoginClickListener('out')}
                                 />
                             );
                         })}
@@ -316,13 +423,21 @@ export default class OCR extends Component<Props> {
 
 
 
-                    {/*{ Object.entries(textRecieved).map((item, key)=>(*/}
-                        {/*<Text key={key} style={styles.loginText} > { item } </Text>)*/}
-                    {/*)}*/}
+               
 
 
 
             </View>
+            /*<View style={style.screen}>
+            <ScrollView>
+                {this.state.image ? this.renderAsset(this.state.image) : null}
+                {this.state.images ? this.state.images.map(i => <View key={i.uri}>{this.renderAsset(i)}</View>) : null}
+            </ScrollView>
+
+            <TouchableOpacity onPress={() => this.pickSingleWithCamera(true)} style={styles.buttonContainer}>
+            <Text>Select Single With Camera With Cropping</Text>
+            </TouchableOpacity>
+            </View>*/
         );
     }
 
@@ -376,5 +491,11 @@ const styles = StyleSheet.create({
     },
     loginText: {
         color: 'white',
+    },
+    opacity:{
+    marginBottom:30,
+    width:260,
+    alignItems: 'center',
+    opacity:0.5
     }
 });
