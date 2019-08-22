@@ -6,6 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Reformed Rabbit Requistions Routine</title>
 	<link rel="stylesheet" href="styles.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<script defer src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
 </head>
 <body>
@@ -13,14 +14,23 @@
 	<div class="content">
 		<div id="test-react-container">
 		<form id = "add-claim">
-			<input type="date" name="date">
-			<select name="type">
-				<option value="Miscellaneous">Miscellaneous</option>
-				<option value="Fuel">Fuel</option>
-			</select>
-			<input type="number" name="amount" placeholder="Total Amount" step="0.01">
-			<input type="text" name="username" placeholder="Jane Doe">
-			<button>Add Claim</button>
+			<fieldset id="add-claim">
+				<legend>Add Claim</legend>
+				<input type="date" name="date">
+				<div class="form-group">
+				<label>Select Claim Type:</label>
+					<select name="type">
+						<option value="Miscellaneous">Miscellaneous</option>
+						<option value="Fuel">Fuel</option>
+					</select>
+				</div>
+			</br>
+				<input type="number" name="amount" placeholder="Total Amount" step="0.01">
+				<input type="text" name="username" placeholder="Jane Doe">
+				<div class="form-group">
+				<button>Add Claim</button>
+				</div>
+			</fieldset>
 		</form>
 		<ul id="claims-list"></ul>
 	</div>
