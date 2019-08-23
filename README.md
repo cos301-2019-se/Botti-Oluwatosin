@@ -26,7 +26,7 @@ Oluwatosin Botti u13208642 <br>
 |Team Member | Details | 
 | :---         | :---         |  
 |**Oluwatosin Botti**|**u13208642** |
-|**Profile** |<a href="https://github.com/olwabott" target="_blank">Github</a>|
+|**Profile** |<a href="https://www.linkedin.com/in/tosin-botti-9245a3a1/" target="_blank">LinkedIn</a>|
 |**Overview**|I&#39;m a determined individual who works hard and is always willing to learn. |
 |**Position** |Final year BSc IT|
 |**Interests** |Creating Websites, Reading...novels, Cooking, Eating and Gaming|
