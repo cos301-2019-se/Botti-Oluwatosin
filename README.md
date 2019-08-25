@@ -13,7 +13,7 @@ The image scanner will extract the relevant information from the scanned image, 
 <a href="https://github.com/cos301-2019-se/Reformed-Rabbit-Requisitions-Routine/blob/master/src-old/Documentation/Demo%202.pdf" target="_blank">Architectural Design and Requirements Document</a>
 
 **Functional and Architectural Design:**
-<a href="Demo 4.pdf"
+<a href="https://github.com/cos301-2019-se/Botti-Oluwatosin/blob/master/Demo%204.pdf"
 target="_blank"> Functional and Architectural Design Document</a>
 
 **User Manual:**
