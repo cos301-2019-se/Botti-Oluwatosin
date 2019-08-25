@@ -17,7 +17,7 @@ The image scanner will extract the relevant information from the scanned image, 
 target="_blank"> Functional and Architectural Design Document</a>
 
 **User Manual:**
-<a href="src-old/Documentation/User_Manual.pdf" target="_blank">User Manual Document</a>
+<a href="src-old/Documentation/Updated_User_Manual.pdf" target="_blank">User Manual Document</a>
 
 **Coding Standards:**
 <a href="src-old/Documentation/Coding_Standards.pdf" target="_blank">Coding Standards Document</a>
