@@ -24,6 +24,8 @@ import{
 import test from './images/test.json';
 import Lightbox from 'react-native-lightbox';
 //import Carousel from 'react-native-looped-carousel';
+import Realm from 'realm';
+let realm;
 
 const WINDOW_WIDTH = Dimensions.get('window').width;
 const BASE_PADDING = 10;
@@ -50,12 +52,18 @@ export default class LoginView extends Component {
             isLoading:true,
             dataSource: [],
         }
+
+        realm = new Realm({ path: 'RRRR.realm' });
+        var claims = realm.objects('travel_claims');
+        this.state = {
+            dataSource: claims,
+          };
     }
 
     componentDidMount() {
         this.setState({
             isLoading:false,
-            dataSource: test.info
+            //dataSource:claims
         });
     }
 
@@ -78,8 +86,8 @@ export default class LoginView extends Component {
                     <CardItem>
                         <Body>
                             <Text> Date: {result.date}</Text>
-                            <Text> Type: {result.type}</Text>
-                            <Text> Claim Amount: {result.amount}</Text>
+                            <Text> Distance: {result.distance}km</Text>
+                            <Text> Claim Amount: {result.amount.toFixed(2)}</Text>
                         </Body>
                     </CardItem>
                 </Card>

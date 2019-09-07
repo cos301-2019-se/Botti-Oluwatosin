@@ -9,11 +9,28 @@ import {
     Image,
     Alert
 } from 'react-native';
+import Realm from 'realm';
+let realm;
 
 export default class LoginView extends Component {
 
     constructor(props) {
         super(props);
+        realm = new Realm({
+            path: 'RRRR.realm',
+            schema: [
+              {
+                name:'travel_claims',
+                properties: {
+                  claim_id: { type: 'int', default: 0 },
+                  client: 'string',
+                  distance: 'float',
+                  date: 'string',
+                  amount: 'float'
+                },
+              },
+            ],
+          });
         this.state = {
             tracker: false,
             email   : '',

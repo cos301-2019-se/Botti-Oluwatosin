@@ -56,12 +56,13 @@ export default class LoginView extends Component {
                 <View style={styles.inputContainer}>
                     {//<Image style={styles.inputIcon} source={{uri: 'https://png.icons8.com/key-2/ultraviolet/50/3498db'}}/>
                     }<TextInput style={styles.inputs}
-                               placeholder="personel number"
+                               placeholder="email-address"
                                placeholderTextColor = "#989898"
+                               keyboardType="email-address"
                                underlineColorAndroid='transparent'
                                onChangeText={this.handleNumber}/>
                 </View>
-            {<Button title="Get Keys!" onPress={this.getAllKeys} />
+            {//<Button title="Get Keys!" onPress={this.getAllKeys} />
             }
             <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={() => this._signInAsync()}>
                     <Text style={styles.loginText}>Sign in!</Text>

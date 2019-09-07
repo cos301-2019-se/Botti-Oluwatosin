@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "36159811627",
+    "firebase_url": "https://test-project-67aff.firebaseio.com",
+    "project_id": "test-project-67aff",
+    "storage_bucket": "test-project-67aff.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:36159811627:android:3ce385bbea7b40b6",
+        "android_client_info": {
+          "package_name": "com.retro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "36159811627-ja6o8cubm8gki2se2q28vrg2j7lmclnk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.retro",
+            "certificate_hash": "6d7807448cf03a1245885b6562e7e909ff228b7a"
+          }
+        },
+        {
+          "client_id": "36159811627-rm5gd1c985b943pph2lns65f0ofps574.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCKdJcnXhbnzyO8uFrX0oZjPQCmutD8QvM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "36159811627-rm5gd1c985b943pph2lns65f0ofps574.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

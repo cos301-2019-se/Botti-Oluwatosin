@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 //import react in our code.
-import { StyleSheet, View, Text, Button } from 'react-native';
+import { StyleSheet, View, Text, Button, Alert } from 'react-native';
 //import all the components we are going to use.
 import AsyncStorage from '@react-native-community/async-storage';
+import Realm from 'realm';
+let realm;
 
 
 export default class SecondPage extends Component {
@@ -14,7 +16,10 @@ constructor(props){
       date: '',
       distance:0,
       user: '',
+      type:'',
+      amount:0
     };
+    realm = new Realm({ path: 'RRRR.realm' });
   }
 
   async componentWillMount() {
@@ -44,6 +49,28 @@ constructor(props){
   }
 
   clearStart = async () => {
+    realm.write(() => {
+      var ID = realm.objects('travel_claims').sorted('claim_id',true).length > 0 ? realm.objects('travel_claims').sorted('claim_id', true)[0].claim_id + 1 : 1;
+      realm.create('travel_claims', {
+        claim_id: ID,
+        client: "Example Client",
+        distance: this.state.distance,
+        date: this.state.date,
+        amount: this.state.amount,
+
+      });
+      Alert.alert(
+        'Success',
+        'Your claim has been submitted successfully',
+        [
+          {
+            text: 'Ok',
+            onPress: () => this.props.navigation.navigate('HOME'),
+          },
+        ],
+        { cancelable: false }
+      );
+    });
     const keys = ['@ODOMETER_START', '@ODOMETER_END']
     try {
     await AsyncStorage.multiRemove(keys)
@@ -74,31 +101,36 @@ constructor(props){
         //const text =  this.props.navigation.getParam('text', 'nothing sent');
         const start = this.props.navigation.getParam('start', 'error: not found');
         const end = this.props.navigation.getParam('end', 'error: not found');
+        const type = this.props.navigation.getParam('type', 'error: not found');
         var startInt = parseInt(start,10);
         var endInt = parseInt(end, 10);
         var distance = endInt - startInt;
+        var amount = distance * 3.64;
         console.log("Testing conversion of string to int...Start: " + startInt + " End: " + endInt + " Distance: " + distance)
         this.state.distance = distance;
-      
+        this.state.type = type;
+        this.state.amount = amount;
 
         return (
             <View style={styles.container}>
 
                 <Text>--------------------------</Text>
                 <Text>Date:{this.state.date}</Text>
+                <Text>Claim Type:{this.state.type}</Text>
                 <Text>Start:{start}</Text>
                 <Text>End:{end}</Text>
                 <Text>Distance:{this.state.distance}</Text>
-                <Text> User:{this.state.user}</Text>
+                <Text>User:{this.state.user}</Text>
+                <Text>Amount:{this.state.amount}</Text>
                 <Text>--------------------------</Text>
                 <Button
                   testID="clear_button"
-                  title="Clear item"
+                  title="Submit"
                   onPress={this.clearStart}
                 />
                 <Button
                   testID="clear_button"
-                  title="Clear item"
+                  title="Log Out"
                   onPress={this._signOutAsync}
                 />
             </View>
