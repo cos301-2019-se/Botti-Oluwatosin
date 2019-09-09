@@ -7,7 +7,7 @@
  */
 
 import React, {Component} from 'react';
-import {createStackNavigator,createAppContainer,createSwitchNavigator} from 'react-navigation';
+import {createStackNavigator,createAppContainer,createSwitchNavigator, createBottomTabNavigator, createDrawerNavigator} from 'react-navigation';
 import {
     ActivityIndicator,
     AsyncStorage,
@@ -16,6 +16,7 @@ import {
     StyleSheet,
     View,
   } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 import HOME from './pages/home' ;
 import FUELCLAIM from './pages/fuelClaim' ;
 import MISCCLAIM from './pages/miscClaim' ;
@@ -23,6 +24,7 @@ import OCR from './ocr/OCR';
 import Output from './ocr/Output';
 import Claims from './pages/claims';
 import LOGIN from './pages/signin';
+import PROFILE from './pages/profile';
 //import SIGNIN from
 
 class AuthLoadingScreen extends Component {
@@ -70,7 +72,8 @@ const Auth = createStackNavigator({
     }
 });
 const App = createStackNavigator({
-
+  //const TabNavigator = createBottomTabNavigator({
+    //const AppDrawerNavigator = createDrawerNavigator({
     HOME: {
         screen: HOME,
         navigationOptions: {
@@ -83,37 +86,40 @@ const App = createStackNavigator({
     MISCCLAIM: {
         screen: MISCCLAIM,
         navigationOptions: {
-            title: 'miscellaneous',
+            title: 'Miscellaneous Claim',
             headerStyle: {backgroundColor: '#8AD32E'},
             headerTintColor: '#ffffff',
         }
     },
 
+    /*FuelStack: {
+      screen: FUELCLAIM
+    },*/
     FUELCLAIM: {
-        screen: FUELCLAIM,
-        navigationOptions: {
-            title: 'FUELCLAIM',
-            headerStyle: {backgroundColor: '#8AD32E'},
-            headerTintColor: '#ffffff',
-        }
+      screen: FUELCLAIM,
+      navigationOptions: {
+          title: 'FUELCLAIM',
+          headerStyle: {backgroundColor: '#8AD32E'},
+          headerTintColor: '#ffffff',
+      }
     },
-
+  
     OCR: {
-        screen: OCR,
-        navigationOptions: {
-            title: 'OCR',
-            headerStyle: {backgroundColor: '#8AD32E'},
-            headerTintColor: '#ffffff',
-        },
+      screen: OCR,
+      navigationOptions: {
+          title: 'OCR',
+          headerStyle: {backgroundColor: '#8AD32E'},
+          headerTintColor: '#ffffff',
+      },
     },
-
+  
     Output: {
-        screen: Output,
-        navigationOptions: {
-            title: 'Output',
-            headerStyle: {backgroundColor: '#8AD32E'},
-            headerTintColor: '#ffffff',
-        },
+      screen: Output,
+      navigationOptions: {
+          title: 'Output',
+          headerStyle: {backgroundColor: '#8AD32E'},
+          headerTintColor: '#ffffff',
+      },
     },
 
     Claims:{
@@ -123,15 +129,77 @@ const App = createStackNavigator({
             headerStyle: {backgroundColor: '#8AD32E'},
             headerTintColor: '#ffffff',
         },
+    },
+    
+    /*defaultNavigationOptions: ({navigation}) => {
+      return{
+        headerLeft: <Icon name="md-menu" size={30}/>
+      }
     }
 });
+const FuelStack = createStackNavigator({
+  FUELCLAIM: {
+    screen: FUELCLAIM,
+    navigationOptions: {
+        title: 'FUELCLAIM',
+        headerStyle: {backgroundColor: '#8AD32E'},
+        headerTintColor: '#ffffff',
+    }
+  },
+
+  OCR: {
+    screen: OCR,
+    navigationOptions: {
+        title: 'OCR',
+        headerStyle: {backgroundColor: '#8AD32E'},
+        headerTintColor: '#ffffff',
+    },
+  },
+
+  Output: {
+    screen: Output,
+    navigationOptions: {
+        title: 'Output',
+        headerStyle: {backgroundColor: '#8AD32E'},
+        headerTintColor: '#ffffff',
+    },
+  },
+});
+
+const DashboardStackNavigator = createStackNavigator({
+  PROFILE: {
+    screen: PROFILE,
+    navigationOptions: {
+        title: 'User Profile',
+        headerStyle: {backgroundColor: '#8AD32E'},
+        headerTintColor: '#ffffff',
+    }
+  },
+});
 //export default createAppContainer(App);
-export default createAppContainer(createSwitchNavigator({
+/*export default createAppContainer(createSwitchNavigator({
     AuthLoading: AuthLoadingScreen,
     App: App,
+    //TabNavigator: TabNavigator,
     Auth: Auth,
   },
   {
     initialRouteName: 'AuthLoading',
   }
-));
+));*/
+const AppDrawerNavigator = createDrawerNavigator({
+  HOME: {
+    screen: App 
+  },
+  UserProfile: {
+    screen: DashboardStackNavigator
+  }
+});
+const AppSwitchNavigator = createSwitchNavigator({
+  AuthLoading: AuthLoadingScreen,
+  App: AppDrawerNavigator,
+  //TabNavigator: TabNavigator,
+  Auth: Auth,
+});
+
+export default createAppContainer(AppSwitchNavigator, {initialRouteName: 'AuthLoading'});
