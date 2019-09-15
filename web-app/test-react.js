@@ -3,6 +3,14 @@ const form = document.querySelector('#add-claim');
 const updateForm = document.querySelector('#update-claim')
 const rate = 3.64;
 
+function toggleFunction() {
+  var x = document.getElementById("add-claim");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
 		function renderClaims(doc){
 			let li = document.createElement('li');
 			let date = document.createElement('span');
