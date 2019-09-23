@@ -6,18 +6,26 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Reformed Rabbit Requisitions Routine</title>
 	<link rel="stylesheet" href="styles.css">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<!--link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"-->
 	<script defer src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
 </head>
 <body>
+		<div class="tab">
+				<button class="tablinks" onclick="openCity(event, 'Home')">Home</button>
+				<button class="tablinks" onclick="openCity(event, 'CompanyDefaults')">Company Information</button>
+			  </div>
+	<div id="Home" class="tabcontent" style= "display : block;">
 	<h1>Claims</h1>
 	<div class="content">
 		<div id="test-react-container">
 				<button onclick="toggleFunction()">Add Claim</button>
+				<button onclick="uploadcsv()">Upload CSV</button>
+				<form id="uploadCsv" style="display:none;">
+						<input type="file" id="csv-file" name="files"/>
+					</form>
 		<form id = "add-claim" style="display:none;">
 			<fieldset id="add-claim">
-				<legend>Add Claim</legend>
-				<input type="date" name="date">
+				<input type="date" name="date" required>
 				<div class="form-group">
 				<label>Select Claim Type:</label>
 					<select name="type">
@@ -26,8 +34,9 @@
 					</select>
 				</div>
 			</br>
-				<input type="number" name="amount" placeholder="Total Amount" step="0.01">
-				<input type="text" name="username" placeholder="Jane Doe">
+				<input type="text" name="destination" placeholder="Shop/Place" required>
+				<input type="number" name="amount" placeholder="Total Amount" step="0.01" required>
+				<input type="text" name="username" placeholder="Jane Doe" required>
 				<div class="form-group">
 				<button>Add Claim</button>
 				</div>
@@ -55,6 +64,22 @@
 		</div>
 	
 	</div>
+</div>
+<div id=CompanyDefaults class="tabcontent">
+		<h1>Company Information</h1>
+		<div class="content">
+			<form id = "CompanyInfo">
+				<fieldset id="companyInfo">
+					<input type="text" name="name" placeholder="Company Name" required>
+					<input type="email" name="email" placeholder="company@workplace.com" required>
+					<br/>
+					<input type="number" name="rate" placeholder="Fuel rate" step="0.01" required>
+					<br/>
+					<button>Add Information</button>
+				</fieldset>
+			</form>
+		</div>
+</div>
 	<!--section class="section">
 		<div class="container">
 			<h1 class="title">
@@ -106,6 +131,7 @@
 			</div>
 		</div>
 	</section-->
+	<script src="./papaparse.min.js"></script>
 	<script src="https://code.jquery.com/jquery-2.2.4.min.js"
 	integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
 	crossorigin="anonymous"></script>
