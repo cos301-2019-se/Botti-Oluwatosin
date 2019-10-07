@@ -250,7 +250,7 @@ function toggleFunction() {
 
 
     //real time listenener
-    database.collection('claims').onSnapshot(snapshot =>{
+    database.collection('claims')orderBy('date').onSnapshot(snapshot =>{
       let changes = snapshot.docChanges();
       changes.forEach(change => {
         if(change.type === 'added'){
