@@ -9,28 +9,15 @@ import {
     Image,
     Alert
 } from 'react-native';
-import Realm from 'realm';
-let realm;
-
+import Realm from '../pages/schemas';
+//let realm;
+import {TravelClaimsSchema, DestinationsSchema} from '../pages/schemas';
 export default class LoginView extends Component {
 
     constructor(props) {
         super(props);
-        realm = new Realm({
-            path: 'RRRR.realm',
-            schema: [
-              {
-                name:'travel_claims',
-                properties: {
-                  claim_id: { type: 'int', default: 0 },
-                  client: 'string',
-                  distance: 'float',
-                  date: 'string',
-                  amount: 'float'
-                },
-              },
-            ],
-          });
+        realm = new Realm({path:'RRRR.realm',
+      schema:[TravelClaimsSchema, DestinationsSchema]});
         this.state = {
             tracker: false,
             email   : '',
@@ -40,29 +27,56 @@ export default class LoginView extends Component {
         }
     }
 
-    onLoginClickListener = (ocr) => {
+    onClaimClickListener = (ocr) => {
         this.props.navigation.navigate('Claims')
     }
     
     onMiscClaimClickListener = (start) => {
-        this.props.navigation.navigate('MISCCLAIM')
+      Alert.alert('Info','This functionality is coming soon.',
+      [
+        {
+          text: 'Ok',
+          
+        },
+      ]);
+        //this.props.navigation.navigate('MISCCLAIM')
     }
 
     onFuelClaimClickListener = (end) => {
         this.props.navigation.navigate('FUELCLAIM')
     }
+    onProfileClickListener = (profile) => {
+        this.props.navigation.navigate('PROFILE')
+    }
+    onDestinationClickListener = (ocr) => {
+      this.props.navigation.navigate('Destination')
+  }
 
   render() {
     return (
         <View style={styles.container}>
-            <View style={{height:150}}>
+            <View style={{height:180}}>
             <TouchableHighlight
-                        style={[styles.buttonContainer, styles.loginButton]}
-                        onPress={() => this.onLoginClickListener('claim')}
-                    >
+                style={[styles.buttonContainer, styles.loginButton]}
+                onPress={() => this.onClaimClickListener('claim')}>
 
-                        <Text style={styles.loginText}>View Claims</Text>
-                    </TouchableHighlight>
+              <Text style={styles.loginText}>View Claims</Text>
+            </TouchableHighlight>
+                  
+            <TouchableHighlight
+              style={[styles.buttonContainer, styles.loginButton]}
+              onPress={() => this.onProfileClickListener('profile')}>
+
+                <Text style={styles.loginText}>View/Edit User Details</Text>
+            </TouchableHighlight>
+
+            <TouchableHighlight
+              style={[styles.buttonContainer, styles.loginButton]}
+              onPress={() => this.onDestinationClickListener('destination')}>
+
+                <Text style={styles.loginText}>Manage Destinations</Text>
+            </TouchableHighlight>
+
             </View>
             <Text h1> Create New Claim</Text>
             <TouchableHighlight 

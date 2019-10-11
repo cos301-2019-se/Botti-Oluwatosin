@@ -25,12 +25,15 @@ import Output from './ocr/Output';
 import Claims from './pages/claims';
 import LOGIN from './pages/signin';
 import PROFILE from './pages/profile';
+import Destination from './pages/destinations';
+import NewDestination from './pages/addDestination';
 //import SIGNIN from
 
 class AuthLoadingScreen extends Component {
     constructor() {
       super();
       this._bootstrapAsync();
+      console.disableYellowBox = true;
     }
   
     // Fetch the token from storage then navigate to our appropriate place
@@ -130,12 +133,30 @@ const App = createStackNavigator({
             headerTintColor: '#ffffff',
         },
     },
-    
-    /*defaultNavigationOptions: ({navigation}) => {
-      return{
-        headerLeft: <Icon name="md-menu" size={30}/>
-      }
-    }
+    PROFILE: {
+      screen: PROFILE,
+      navigationOptions: {
+          title: 'User Profile',
+          headerStyle: {backgroundColor: '#8AD32E'},
+          headerTintColor: '#ffffff',
+      } 
+  },
+  Destination: {
+    screen: Destination,
+    navigationOptions: {
+        title: 'Destinations',
+        headerStyle: {backgroundColor: '#8AD32E'},
+        headerTintColor: '#ffffff',
+    } 
+},
+NewDestination: {
+  screen: NewDestination,
+  navigationOptions: {
+      title: 'Destinations',
+      headerStyle: {backgroundColor: '#8AD32E'},
+      headerTintColor: '#ffffff',
+  } 
+},
 });
 const FuelStack = createStackNavigator({
   FUELCLAIM: {

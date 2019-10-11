@@ -1,9 +1,9 @@
 {
     "info":[
-{"src": "require('./images/example.jpg')","date":"12 May 2019", "type":"Miscellaneous", "amount": 24.99},
-{"src": "require('./images/example.jpg')","date":"31 May 2019", "type":"Miscellaneous", "amount":132.02},
-{"src": "require('./images/example.jpg')","date":"26 June 2019", "type":"Fuel", "amount":48.60},
-{"src": "require('./images/example.jpg')","date":"1 July 2019", "type":"Fuel", "amount":144.00},
-{"src": "require('./images/example.jpg')","date":"4 July 2019", "type":"Miscellaneous", "amount":58.99}
+{"claim_id": 1,"date":"12 May 2019", "type":"Miscellaneous", "amount": 24.99, "destination_id":1, "destination":"365 Hill Street"},
+{"claim_id": 2,"date":"31 May 2019", "type":"Miscellaneous", "amount":132.02, "destination_id":1, "destination":"365 Hill Street"},
+{"claim_id": 3,"date":"26 June 2019", "type":"Fuel", "amount":48.60, "destination_id":1, "destination":"365 Hill Street"},
+{"claim_id": 4,"date":"1 July 2019", "type":"Fuel", "amount":144.00, "destination_id":1, "destination":"365 Hill Street"},
+{"claim_id": 5,"date":"4 July 2019", "type":"Miscellaneous", "amount":58.99, "destination_id":1, "destination":"365 Hill Street"}
 ]
 }

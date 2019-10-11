@@ -45,11 +45,23 @@ export default class ProfileView extends Component {
         this.setState({
           username: values[0][1],
           email: values[1][1],
-          loading: 'false'
+          loading: 'false',
+          textInputDisableStatus : false
         });
         console.log("username: " + username + " user email: " + email)
       });
     }  
+    _signOutAsync = async () => {
+      const keys = ['@userName', '@userNumber']
+      try {
+      await AsyncStorage.multiRemove(keys)
+      }
+      catch(e) {
+      // remove error
+      }
+      console.log('Done'+ keys +'removed')
+    this.props.navigation.navigate('Auth');
+    }
     onPressButton = () => {  
         this.setState({ TextInputDisableStatus: true })  
         }
@@ -81,7 +93,7 @@ export default class ProfileView extends Component {
       }
       console.log(values)
   };
-
+  
   render() {
     if (this.state.loading === 'initial') {
       console.log('This happens 2nd - after the class is constructed. You will not see this element because React is still computing changes to the DOM.');
@@ -125,14 +137,13 @@ export default class ProfileView extends Component {
 
           <Text style={styles.loginText}>Update</Text>
         </TouchableHighlight>
+        <TouchableHighlight
+          style={[styles.buttonContainer, styles.loginButton]}
+          onPress={() => this._signOutAsync()}
+        >
 
-        <Button  
-          onPress={this.onPressButton}  
-          title="Update Username"  
-          color="#841584"  
-          accessibilityLabel="Update User Details"  
-/>
-        
+          <Text style={styles.loginText}>Log Out</Text>
+        </TouchableHighlight>
       </View>
     );
   }

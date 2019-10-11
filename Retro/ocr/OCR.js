@@ -12,30 +12,39 @@ import style, {screenHeight, screenWidth} from "../styles";
 import {RNCamera as Camera} from "react-native-camera";
 import RNTextDetector from "react-native-text-detector";
 import AsyncStorage from '@react-native-community/async-storage';
+import * as RNFS from 'react-native-fs';
 
-type Props = {};
 var textString = "";
+
 
 const PICTURE_OPTIONS = {
     quality: 1,
     fixOrientation: true,
     forceUpOrientation: true
 };
+//const type = this.props.navigation.getParam('type', 'error: not found');
 
-export default class OCR extends Component<Props> {
+export default class OCR extends Component {
 
-    state = {
-        loading: false,
-        image: null,
-        error: null,
-        visionResp: [],
-        total: 0,
-        date: "",
-        odometerStart: '',
-        odometerEnd:''
-    };
+    constructor(props){
+        super(props);
+        this.state = {
+            loading: false,
+            image: null,
+            error: null,
+            visionResp: [],
+            total: 0,
+            date: "",
+            odometerStart: '',
+            odometerEnd:'',
+            destination:''
+    }
+    const type = this.props.navigation.getParam('type', 'error: not found');
+}
+    
 
     async componentWillMount() {
+        
         const odometerStart = await AsyncStorage.getItem('@ODOMETER_START');
         if (odometerStart) {
           this.setState({
@@ -66,7 +75,8 @@ export default class OCR extends Component<Props> {
                     image: data.uri
                 },
                 () => {
-                    //console.log("image");
+                    RNFS.copyFile(data.uri, "../pages/images")
+                    console.log("data.uri = ", data.uri)
                     this.processImage(data.uri, {
                         height: data.height,
                         width: data.width
@@ -127,13 +137,17 @@ export default class OCR extends Component<Props> {
 
             if (!(visionResp && visionResp.length > 0)) {
                 throw "UNMATCHED";
+                
             }
             this.setState({
                 visionResp: this.mapVisionRespToScreen(visionResp, imageProperties)
             });
         } catch (e) {
+            Alert.alert('Error', 'No text detected',
+                [{text:"Try Again"}])
             console.error(e);
-            throw e;
+            //throw e;*/
+
         }
     };
 
@@ -230,48 +244,72 @@ export default class OCR extends Component<Props> {
 
     setReading = async (rText) => {
         console.log("I have entered the function")
-       
-        const number = rText.replace(/ /g, "");
-        if(this.state.odometerStart === '')
+       var type = this.props.navigation.getParam('type', 'error: not found');
+       console.log("Type= ", type) 
+       const number = rText.replace(/ /g, "");
+        if(type === 'fuel')
         {
-            console.log("OdometerStart state is not set")
-            
-            try {
-                await AsyncStorage.setItem('@ODOMETER_START', number)
-                this.setState({odometerStart: number});
-              } catch(e) {
-                // save error
-                console.log(e);
-              }
-            
-              console.log('Done.')
-            
-            const value = await AsyncStorage.getItem('@ODOMETER_START')
-            if(value !== null) {
-            // value previously stored
-            console.log("ODOMETER_START has been set", value );
-            console.log("odometerStart:", this.state.odometerStart);
-            }
-            this.props.navigation.push('FUELCLAIM'); 
-        }
-        else
-        {   console.log("OdometerStart state should be set, but not yet OdometerEnd")
-            try {
-                await AsyncStorage.setItem('@ODOMETER_END', number);
-                this.setState({odometerEnd:number});
+            if(this.state.odometerStart === '')
+            {
+                console.log("OdometerStart state is not set")
+                
+                try {
+                    await AsyncStorage.setItem('@ODOMETER_START', number)
+                    this.setState({odometerStart: number});
                 } catch(e) {
-                // save error
-                console.log(e);
-              }
-            
-            const value = await AsyncStorage.getItem('@ODOMETER_END')
-            if(value !== null) {
-                console.log("ODOMETER_END has been set", value );
-                console.log("odometerEnd:", this.state.odometerEnd);
+                    // save error
+                    console.log(e);
+                }
+                
+                console.log('Done.')
+                
+                const value = await AsyncStorage.getItem('@ODOMETER_START')
+                if(value !== null) {
+                // value previously stored
+                console.log("ODOMETER_START has been set", value );
+                console.log("odometerStart:", this.state.odometerStart);
+                }
+                this.props.navigation.push('FUELCLAIM'); 
             }
-            
-            //this.props.navigation.navigate('Output', {start:this.state.odometerStart, end:this.state.odometerEnd})
-            this.props.navigation.push('FUELCLAIM');
+            else
+            {   console.log("OdometerStart state should be set, but not yet OdometerEnd")
+                try {
+                    await AsyncStorage.setItem('@ODOMETER_END', number);
+                    this.setState({odometerEnd:number});
+                    } catch(e) {
+                    // save error
+                    console.log(e);
+                }
+                
+                const value = await AsyncStorage.getItem('@ODOMETER_END')
+                if(value !== null) {
+                    console.log("ODOMETER_END has been set", value );
+                    console.log("odometerEnd:", this.state.odometerEnd);
+                }
+                
+                //this.props.navigation.navigate('Output', {start:this.state.odometerStart, end:this.state.odometerEnd})
+                this.props.navigation.push('FUELCLAIM');
+            }
+        }
+        if(type === 'destination')
+        {                
+                try {
+                    await AsyncStorage.setItem('@destination', number)
+                    this.setState({destination: number});
+                } catch(e) {
+                    // save error
+                    console.log(e);
+                }
+                
+                console.log('Done.')
+                
+                const value = await AsyncStorage.getItem('@destination')
+                if(value !== null) {
+                // value previously stored
+                console.log("destination has been set", value );
+                console.log("destination:", this.state.odometerStart);
+                }
+                this.props.navigation.push('NewDestination'); 
         }
         
       };
