@@ -299,8 +299,7 @@ function toggleFunction() {
             let li = claimsList.querySelector('[data-id=' + change.doc.id + ']');
           claimsList.removeChild(li);
             console.log("This claim has been deleted", change.doc.data());
-          }
+          }//hjhb
         }
     });
 });
-
