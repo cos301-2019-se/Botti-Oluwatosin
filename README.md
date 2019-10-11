@@ -6,21 +6,18 @@ Retro Rabbits current claims process is slow and tedious. The aim of this projec
 
 The image scanner extracts the relevant information from the scanned image, do the necessary calculations and store this information. Then the employee will simply send all their stored claims to a database in the cloud from where the information can be prepared for submitting fuel claims to Retro Rabbit.
 
-**SRS Document:**
-<a href="https://github.com/cos301-2019-se/Reformed-Rabbit-Requisitions-Routine/blob/master/src-old/Documentation/Demo%201.pdf" target="_blank">SRS Document</a>
-
-**Architectural Design and Requirements:**
-<a href="https://github.com/cos301-2019-se/Reformed-Rabbit-Requisitions-Routine/blob/master/src-old/Documentation/Demo%202.pdf" target="_blank">Architectural Design and Requirements Document</a>
-
-**Functional and Architectural Design:**
+**Documentation**
+<details><summary> Select Document</summary></br>
+<a href="https://github.com/cos301-2019-se/Reformed-Rabbit-Requisitions-Routine/blob/master/src-old/Documentation/Demo%201.pdf" target="_blank">SRS Document</a></br>
+<a href="https://github.com/cos301-2019-se/Reformed-Rabbit-Requisitions-Routine/blob/master/src-old/Documentation/Demo%202.pdf" target="_blank">Architectural Design and Requirements Document</a></br>
 <a href="https://github.com/cos301-2019-se/Botti-Oluwatosin/blob/master/Demo%204.pdf"
-target="_blank"> Functional and Architectural Design Document</a>
+target="_blank"> Functional and Architectural Design Document</a></br>
+<a href="src-old/Documentation/Updated_User_Manual.pdf" target="_blank">User Manual Document</a></br>
+<a href="src-old/Documentation/Updated_Coding_Standards.pdf" target="_blank">Coding Standards Document</a></br>
+</details>
 
-**User Manual:**
-<a href="src-old/Documentation/Updated_User_Manual.pdf" target="_blank">User Manual Document</a>
-
-**Coding Standards:**
-<a href="src-old/Documentation/Updated_Coding_Standards.pdf" target="_blank">Coding Standards Document</a>
+**Web-Application:**
+<a href = "https://cos301-2019-se.github.io/Botti-Oluwatosin/web-app/"> Retro Rabbit Requisitions Routine </a>
 
 
 **Team Members**
