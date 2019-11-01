@@ -7,13 +7,13 @@ Retro Rabbits current claims process is slow and tedious. The aim of this projec
 The image scanner extracts the relevant information from the scanned image, do the necessary calculations and store this information. Then the employee will simply send all their stored claims to a database in the cloud from where the information can be prepared for submitting fuel claims to Retro Rabbit.
 
 **Documentation**
-<details><summary></summary></br>
-<a href="https://github.com/cos301-2019-se/Reformed-Rabbit-Requisitions-Routine/blob/master/src-old/Documentation/Demo%201.pdf" target="_blank"></a></br>
-<a href="https://github.com/cos301-2019-se/Reformed-Rabbit-Requisitions-Routine/blob/master/src-old/Documentation/Demo%202.pdf" target="_blank">Architectural Design and Requirements Document</a></br>
+<details><summary>Select Document</summary></br>
 <a href="SRS FInal.pdf"
 target="_blank"> Functional and Architectural Design Document</a></br>
 <a href="User_Manual_Final.pdf" target="_blank">User Manual Document</a></br>
 <a href="src-old/Documentation/Updated_Coding_Standards.pdf" target="_blank">Coding Standards Document</a></br>
+<a href="https://github.com/cos301-2019-se/Reformed-Rabbit-Requisitions-Routine/blob/master/src-old/Documentation/Demo%201.pdf" target="_blank"></a></br>
+<a href="https://github.com/cos301-2019-se/Reformed-Rabbit-Requisitions-Routine/blob/master/src-old/Documentation/Demo%202.pdf" target="_blank"></a></br>
 </details>
 
 **Web-Application:**
