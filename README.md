@@ -10,9 +10,9 @@ The image scanner extracts the relevant information from the scanned image, do t
 <details><summary> Select Document</summary></br>
 <a href="https://github.com/cos301-2019-se/Reformed-Rabbit-Requisitions-Routine/blob/master/src-old/Documentation/Demo%201.pdf" target="_blank">SRS Document</a></br>
 <a href="https://github.com/cos301-2019-se/Reformed-Rabbit-Requisitions-Routine/blob/master/src-old/Documentation/Demo%202.pdf" target="_blank">Architectural Design and Requirements Document</a></br>
-<a href="https://github.com/cos301-2019-se/Botti-Oluwatosin/blob/master/Demo%204.pdf"
+<a href="SRS FInal.pdf"
 target="_blank"> Functional and Architectural Design Document</a></br>
-<a href="src-old/Documentation/Updated_User_Manual.pdf" target="_blank">User Manual Document</a></br>
+<a href="User_Manual_Final.pdf" target="_blank">User Manual Document</a></br>
 <a href="src-old/Documentation/Updated_Coding_Standards.pdf" target="_blank">Coding Standards Document</a></br>
 </details>
 
